@@ -23,19 +23,20 @@ using namespace std;
 int Solution::numIslands(vector<vector<char>> &grid)
 {
   int n = grid.size(), m = grid[0].size();
-  auto result = 0;
+  auto count = 0;
 
   for (auto i = 0; i < n; i++)
     for (auto j = 0; j < m; j++)
-      /* lands will be marked as water if there
-         are connected to grid[i][j] (assume
-         grid[i][j] is a land too
-         )
+      /* if grid[i][j] is a land, anyone
+         connected to it will be marked as
+         water during the visit including
+         itself.
+         - we add the count of the island by 1
+           before the visit
       */
-      result += (grid[i][j] - '0'),
-          _visit(j, i, grid);
+      count += (grid[i][j] - '0'), _visit(j, i, grid);
 
-  return result;
+  return count;
 }
 
 void Solution::_visit(int x, int y, vector<vector<char>> &grid)
